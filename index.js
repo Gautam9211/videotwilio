@@ -19,11 +19,15 @@ io.on('connection', function(socket){
     console.log('A client joined')
     var clients = io.sockets.adapter.rooms[room];
     var numClients = typeof clients !== 'undefined' ? clients.length : 0;
+    console.log(numClients)
     if(numClients == 0){
       socket.join(room);
     }else if(numClients == 1){
       socket.join(room);
       // When the client is second to join the room, both clients are ready.
+      console.log(room)
+      console.log(socket.id)
+      
       console.log('Broadcasting ready message')
       socket.emit('ready', room);
       socket.broadcast.emit('ready', room);
